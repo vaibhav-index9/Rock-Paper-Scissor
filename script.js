@@ -4,8 +4,8 @@ function getComputerChoice() {
     return choices[index]
 }
 
-function userInput() {
-    let choice = prompt('Enter your choice : rock , paper, or scissor');
+function userInput(round) {
+    let choice = prompt(`Enter your choice for Round ${round+1} : rock , paper, or scissor`);
     if ((choice.toLowerCase() === 'rock') || choice.toLowerCase() === 'paper' || choice.toLowerCase() === 'scissor') {
         return choice.toLowerCase();
     }
@@ -18,34 +18,34 @@ function userInput() {
 function playRound(playerSelection, computerSelection) {
     if ((playerSelection == 'rock' && computerSelection == 'rock') || (playerSelection == 'paper' && computerSelection == 'paper') || (playerSelection == 'scissor' && computerSelection == 'scissor')) {
         console.log('Player choose ' + playerSelection + ' and computer choose ' + computerSelection + ' so it is a Draw');
-        return 'D'
+        return 3 // if it's a draw return 3
     } else if (playerSelection == 'rock' && computerSelection == 'scissor') {
         console.log('Player choose ' + playerSelection + ' and computer choose ' + computerSelection + ' so Player win');
-        return 'P'
+        return 1 // if player win return 1
     } else if (playerSelection == 'paper' && computerSelection == 'rock') {
         console.log('Player choose ' + playerSelection + ' and computer choose ' + computerSelection + ' so Player win');
-        return 'P'
+        return 1  // if player win return 1
     } else if (playerSelection == 'scissor' && computerSelection == 'paper') {
         console.log('Player choose ' + playerSelection + ' and computer choose ' + computerSelection + ' so Player win');
-        return 'P'
+        return 1  // if player win return 1
     }
     else {
         console.log('Player choose ' + playerSelection + ' and computer choose ' + computerSelection + ' so Computer win');
-        return 'C'
+        return 2  // if computer win  return 2
     }
 }
 
 function game() {
-    var player = 0;
-    var computer = 0;
+    let player = 0;
+    let computer = 0;
     for (let index = 0; index < 5; index++) {
-        const playerSelection = userInput();
+        const playerSelection = userInput(index);
         const computerSelection = getComputerChoice();
-        var score = (playRound(playerSelection, computerSelection));
-        if (score == 'P') {
+        let winner = (playRound(playerSelection, computerSelection));
+        if (winner == 1) {
             player += 1
         }
-        else if (score == 'C') {
+        else if (winner == 2) {
             computer += 1
         }
         else {
